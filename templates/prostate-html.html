@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Prostate</title>
+  <script type=text/javascript src="{{url_for('static', filename='js/prostate-js.js') }}"></script> 
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/prostate-css.css') }}">
+</head>
+
+<body style="background: #CDB2D6;" onload="fillTheData()">
+ <div class="title">
+ <h2>Calculator for predicting significant prostate cancer after repeated prostate biopsy</h2>
+ </br>
+ </div>
+ <div class="prediction">
+     <!-- Main Input For Receiving Query to our ML -->
+    <form  action="/predict"	method="post">
+		Age <input type="number" value="{{ Age }}" name="Age" placeholder="Age" required="required" list="ageList"  pattern="[0-9]"/>
+    	PSA <input type="text" value="{{ PSA }}" name="PSA" placeholder="PSA" required="required" list="psaList" />
+        Prostate Volume <input type="text" value="{{ PV }}" name="PV" placeholder="PV" required="required" list="pvList" />
+		DRE <input type="number" value="{{ DRE }}" name="DRE" placeholder="DRE" required="required" list="zero_oneList" pattern="[0-9]" min="0" max="1"/>
+		Family history <input type="number" value="{{ family_history }}" name="family_history" placeholder="family_history" required="required" list="zero_oneList"  pattern="[0-9]" min="0" max="1"/>
+		<button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+		
+		<datalist id="psaList">
+		<option value="2" />
+		</datalist>  
+
+		<datalist id="ageList">
+		<option value="48" />
+		</datalist> 
+
+		<datalist id="pvList">
+		<option value="25" />
+		</datalist> 		
+
+		<datalist id="zero_oneList">
+		<option value="0" />
+		<option value="1" />
+		</datalist>   		
+	</form>
+
+   <br>
+   {{ prediction_text }}
+   <br>
+
+   
+ </div>
+</body>
+</html>
